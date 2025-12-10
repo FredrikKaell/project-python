@@ -47,5 +47,18 @@ class ChainLadder:
                                   (x.month - 1) % self.claim_period - 1))
         )
 
-    def create_triangle(self, ) -> pd.pivot_table:
-        pass
+    def create_triangle(self, transaction_type) -> pd.pivot_table:
+        """
+        Creates a triangle based on data.
+        Args:
+            Transaction_type = Paid, Incurred, NoClaims
+        Returns:
+            Pivot_table
+        """
+        return self.data.pivot_table(
+            index="AM",
+            columns="DM",
+            aggfunc="sum",
+            values=transaction_type,
+            fill_value=0
+        )
